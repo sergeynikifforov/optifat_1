@@ -1,0 +1,44 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class Tree:
+    def __init__(self):
+        self.root = None
+    def add_to_pos(self, node, data):
+        if data < node.data:
+            if node.left is None:
+                node.left = Node(data)
+            else:
+                self.add_to_pos(node.left, data)
+        else:
+            if node.right is None:
+                node.right = Node(data)
+            else:
+                self.add_to_pos(node.right, data)
+
+
+    def add(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+        self.add_to_pos(self.root, data)
+        
+    def print_node(self, node):
+        if node.left:
+            self.print_node(node.left)
+        print(node.data, end = ' ')
+        if node.right:
+            self.print_node(node.right)
+
+    def print(self):
+        if self.root:
+            self.print_node(self.root)
+
+tree = Tree()
+numbers = [int(j) for j in input().split()]
+for number in numbers:
+    tree.add(number)
+tree.print()
